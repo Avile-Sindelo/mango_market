@@ -12,9 +12,10 @@ if (process.env.DATABASE_URL && !local) {
 }
 
 // TODO configure this to work.
-const connectionString = process.env.DATABASE_URL || 'postgresql://@localhost:5432/mango_market';
+const connectionString = process.env.DATABASE_URL || 'postgres://xxxmiqoj:kJ9WWETLdbVCaNDeMxFjUfgF_CZO90X9@snuffleupagus.db.elephantsql.com/xxxmiqoj?ssl=true';
 
 const db = pgp(connectionString);
+
 
 
 // enable the req.body object - to allow us to use HTML forms
