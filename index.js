@@ -40,8 +40,8 @@ let messages = {
 
 app.get('/', async function(req, res) {
 	let topFiveDeals = await Database.topFiveDeals();
-
-	res.render('addDeal', {
+	console.log(topFiveDeals);
+	res.render('index', {
 		counter, topFiveDeals
 	});
 });
@@ -70,13 +70,33 @@ app.post('/addDeal', async function(req, res){
 	} else {
 		//success
 		let shop_id = await Database.getShopId(shop);
-		await Database.createDeal(qty, price, shop_id.id)
+		await Database.createDeal(qty, price, shop_id.id);
+		messages.success = 'Deal added successfully';
+		messages.error = '';
 	}
 	
 
 	let shops = await Database.listShops();
 
 	res.render('addDeal', {shops})
+});
+
+app.get('/showAllShops', async function(req, res){
+	let shops = await Database.listShops();
+
+	res.render('allShops', {shops});
+});
+
+app.post('/addShop', async function(req, res){
+	let shop = req.body.shop_name;
+	await Database.createShop(shop);
+	res.render('addShop')
+});
+
+app.post('/recommend', async function(req, res){
+	let money = req.body.vusi_money;
+
+	render('/', )
 });
 
 // start  the server and start listening for HTTP request on the PORT number specified...
