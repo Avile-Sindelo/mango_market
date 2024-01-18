@@ -95,8 +95,8 @@ app.post('/addShop', async function(req, res){
 
 app.post('/recommend', async function(req, res){
 	let money = req.body.vusi_money;
-
-	render('/', )
+	let recommendedDeals = await Database.recommendDeals(money);
+	render('/', recommendedDeals)
 });
 
 // start  the server and start listening for HTTP request on the PORT number specified...
