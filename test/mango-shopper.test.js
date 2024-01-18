@@ -9,18 +9,18 @@ const connectionString = process.env.DATABASE_URL || 'postgres://xxxmiqoj:kJ9WWE
 const db = pgp(connectionString);
 
 describe('The mango shopper', function () {
-    
-    // beforeEach(async function () {
-    //     await db.none(`delete from mango_deal;`)
-    //     await db.none(`delete from shop;`)
-    // });
+    this.timeout(10000);
+    beforeEach(async function () {
+        await db.none(`delete from mango_deal;`)
+        await db.none(`delete from shop;`)
+    });
 
     it('should be able to create a shop', async function () {
 
         const mangoShopper = MangoShopper(db);
 
         await mangoShopper.createShop('Mango Market');
-        const shops = await await mangoShopper.listShops();
+        const shops = await mangoShopper.listShops();
 
         assert.equal('Mango Market', shops[0].name);
     });
