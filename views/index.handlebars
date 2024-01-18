@@ -2,12 +2,15 @@
 
 <ol>
     {{#each topFiveDeals}}
-        <li>{{qty}} for {{price}} - shop name</li>    
+        <li>{{qty}} for {{price}} - {{id}}</li>    
     {{/each}}
 </ol>
+
 
 
 <form action="/recommend" method="post">
     <label for="recommend">How much money do you have?</label>
     <input name="vusi_money">
+
+    <button type="submit">Get recommendations</button>
 </form>

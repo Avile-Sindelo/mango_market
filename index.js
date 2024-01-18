@@ -2,7 +2,7 @@ const express = require('express');
 const exphbs  = require('express-handlebars');
 const pgp = require('pg-promise')();
 const database = require('./mango-shopper');
-const { invalid } = require('moment');
+
 
 const app = express();
 const PORT =  process.env.PORT || 3019;
@@ -83,6 +83,7 @@ app.post('/addDeal', async function(req, res){
 
 app.get('/showAllShops', async function(req, res){
 	let shops = await Database.listShops();
+	console.log(shops);
 
 	res.render('allShops', {shops});
 });
@@ -97,6 +98,10 @@ app.post('/recommend', async function(req, res){
 	let money = req.body.vusi_money;
 	let recommendedDeals = await Database.recommendDeals(money);
 	render('/', recommendedDeals)
+});
+
+app.get('/dealsForShop', async function(req, res){
+
 });
 
 // start  the server and start listening for HTTP request on the PORT number specified...
