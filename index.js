@@ -37,7 +37,7 @@ let counter = 0;
 app.get('/', async function(req, res) {
 	let topFiveDeals = await Database.topFiveDeals();
 
-	res.render('addDeal', {
+	res.render('index', {
 		counter, topFiveDeals
 	});
 });
