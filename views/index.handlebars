@@ -1,1 +1,7 @@
-<h2>Best deals</h2>
+<h2>Best deals - the top 5 deals</h2>
+
+<ol>
+    {{#each topFiveDeals}}
+        <li>{{qty}} for {{price}} - shop name</li>    
+    {{/each}}
+</ol>

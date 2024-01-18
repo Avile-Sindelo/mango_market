@@ -5,15 +5,15 @@ module.exports = function (db) {
 	}
 
 	async function listShops() {
-		await db.manyOrNone(`select * from shop`);		
+		return await db.manyOrNone(`select * from shop`);		
 	}
 
 	async function dealsForShop(shopId) {
-		await db.manyOrNone(`select * from mango_deal where id=$1`, [shopId])
+		return await db.manyOrNone(`select * from mango_deal where id=$1`, [shopId])
 	}
 
 	async function topFiveDeals() {
-		
+		//return	
 	}
 
 	async function createDeal(qty, price, shopId) {
@@ -21,7 +21,7 @@ module.exports = function (db) {
 	}
 
 	async function recommendDeals(amount) {
-		await db.manyOrNone(`select * from mango_deal where price <= $1`, [amount])
+		return await db.manyOrNone(`select * from mango_deal where price <= $1`, [amount])
 	}
 
 	return {

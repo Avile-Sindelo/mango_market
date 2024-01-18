@@ -1,6 +1,8 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const pgp = require('pg-promise')();
+const database = require('./mango-shopper');
+const { invalid } = require('moment');
 
 const app = express();
 const PORT =  process.env.PORT || 3019;
@@ -15,7 +17,7 @@ if (process.env.DATABASE_URL && !local) {
 const connectionString = process.env.DATABASE_URL || 'postgres://xxxmiqoj:kJ9WWETLdbVCaNDeMxFjUfgF_CZO90X9@snuffleupagus.db.elephantsql.com/xxxmiqoj?ssl=true';
 
 const db = pgp(connectionString);
-
+const Database = database(db);
 
 
 // enable the req.body object - to allow us to use HTML forms
@@ -32,10 +34,35 @@ app.set('view engine', 'handlebars');
 
 let counter = 0;
 
-app.get('/', function(req, res) {
-	res.render('index', {
-		counter
+app.get('/', async function(req, res) {
+	let topFiveDeals = await Database.topFiveDeals();
+
+	res.render('addDeal', {
+		counter, topFiveDeals
 	});
+});
+
+app.post('/addDeal', async function(req, res){
+	let price = req.body.price;
+	let qty = req.body.qty;
+	let shop = req.body.shop_name;
+	
+	console.log('Selected price: ', price);
+	console.log('Selected qty: ', qty); 
+	console.log('Shop name: ', shop);
+
+	if(price < 0){
+		// invalid price 
+	} else if(qty < 0){
+		// invalid qty 
+	} else if(shop == undefined){
+		//please select a shop
+	}
+	
+
+	let shops = await Database.listShops();
+
+	res.render('addDeal', {shops})
 });
 
 // start  the server and start listening for HTTP request on the PORT number specified...

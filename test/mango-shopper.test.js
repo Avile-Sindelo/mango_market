@@ -4,12 +4,12 @@ let MangoShopper = require("../mango-shopper");
 require('dotenv').config()
 
 // TODO configure this to work.
-const connectionString = process.env.DATABASE_URL || 'postgresql://@localhost:5432/mango_shopper';
+const connectionString = process.env.DATABASE_URL || 'postgres://xxxmiqoj:kJ9WWETLdbVCaNDeMxFjUfgF_CZO90X9@snuffleupagus.db.elephantsql.com/xxxmiqoj?ssl=true';
 
 const db = pgp(connectionString);
 
 describe('The mango shopper', function () {
-
+    
     beforeEach(async function () {
         await db.none(`delete from mango_deal;`)
         await db.none(`delete from shop;`)
