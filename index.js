@@ -41,7 +41,7 @@ let messages = {
 app.get('/', async function(req, res) {
 	let topFiveDeals = await Database.topFiveDeals();
 
-	res.render('index', {
+	res.render('addDeal', {
 		counter, topFiveDeals
 	});
 });
@@ -67,6 +67,10 @@ app.post('/addDeal', async function(req, res){
 		//please select a shop
 		messages.error = 'Please select a shop for which you are making the deal';
 		messages.success = '';
+	} else {
+		//success
+		let shop_id = await Database.getShopId(shop);
+		await Database.createDeal(qty, price, shop_id.id)
 	}
 	
 

@@ -24,13 +24,18 @@ module.exports = function (db) {
 		return await db.manyOrNone(`select * from mango_deal where price <= $1`, [amount])
 	}
 
+	async function getShopId(shopName){
+		return await db.one(`select id from shop where name=$1`, [shopName])
+	}
+
 	return {
 		createDeal,
 		createShop,
 		listShops,
 		dealsForShop,
 		recommendDeals,
-		topFiveDeals
+		topFiveDeals,
+		getShopId
 	}
 
 
