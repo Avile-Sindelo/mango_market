@@ -6,6 +6,12 @@
     {{/each}}
 </ol>
 
+<ol>
+    {{#each recommendedDeals}}
+        <li>{{qty}} for R{{price}} - {{id}}</li>    
+    {{/each}}
+</ol>
+
 
 
 <form action="/recommend" method="post">

@@ -97,7 +97,8 @@ app.post('/addShop', async function(req, res){
 app.post('/recommend', async function(req, res){
 	let money = req.body.vusi_money;
 	let recommendedDeals = await Database.recommendDeals(money);
-	render('/', recommendedDeals)
+	console.log('recoo deals: ', recommendedDeals)
+	res.render('index', {recommendedDeals})
 });
 
 app.get('/dealsForShop', async function(req, res){
