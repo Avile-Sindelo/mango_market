@@ -51,6 +51,7 @@ app.get('/addDeal', async function(req, res){
 	let qty = req.query.qty;
 	let shop = req.query.shop_name;
 
+	let shops = await Database.listShops();
 	if(price < 0 || price == ''){
 		// invalid price 
 		messages.error = 'Please make sure you enter a valid Mango price';
@@ -63,17 +64,17 @@ app.get('/addDeal', async function(req, res){
 		//please select a shop
 		messages.error = 'Please select a shop for which you are making the deal';
 		messages.success = '';
+		
 	} else {
 		//success
 		let shop_id = await Database.getShopId(shop);
 		await Database.createDeal(qty, price, shop_id.id);
 		messages.success = 'Deal added successfully';
 		messages.error = '';
+		
 	}
 	
 	console.log(messages)
-	let shops = await Database.listShops();
-
 	res.render('addDeal', {shops})
 });
 

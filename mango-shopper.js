@@ -13,7 +13,7 @@ module.exports = function (db) {
 	}
 
 	async function topFiveDeals() {
-		return await db.manyOrNone(`select * from mango_deal order by price asc limit 5`)
+		return await db.manyOrNone(`select * from mango_deal order by price asc`);
 	}
 
 	async function createDeal(qty, price, shopId) {
