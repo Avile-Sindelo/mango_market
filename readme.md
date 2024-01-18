@@ -1,3 +1,6 @@
+[![Node.js CI](https://github.com/Avile-Sindelo/mango_market/actions/workflows/node.js.yml/badge.svg)](https://github.com/Avile-Sindelo/mango_market/actions/workflows/node.js.yml)
+
+
 # The mango market
 
 The Mango market stalls are regularly running mango specials. Help your friend Vusi to purchase mangos  on special for his fruit and veg shop. With the factory function in `mango-shopper.js` create a web application that will help Vusi to see which mangos are on special.
