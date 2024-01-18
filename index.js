@@ -33,6 +33,10 @@ app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
 
 let counter = 0;
+let messages = {
+	error: '',
+	success: ''
+}
 
 app.get('/', async function(req, res) {
 	let topFiveDeals = await Database.topFiveDeals();
@@ -51,12 +55,18 @@ app.post('/addDeal', async function(req, res){
 	console.log('Selected qty: ', qty); 
 	console.log('Shop name: ', shop);
 
-	if(price < 0){
+	if(price < 0 || price == ''){
 		// invalid price 
-	} else if(qty < 0){
+		messages.error = 'Please make sure you enter a valid Mango price';
+		messages.success = '';
+	} else if(qty < 0 || qty == ''){
 		// invalid qty 
+		messages.error = 'Please make sure to enter the number of Mangos for this deal';
+		messages.success = '';
 	} else if(shop == undefined){
 		//please select a shop
+		messages.error = 'Please select a shop for which you are making the deal';
+		messages.success = '';
 	}
 	
 
