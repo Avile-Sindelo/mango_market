@@ -40,20 +40,16 @@ let messages = {
 
 app.get('/', async function(req, res) {
 	let topFiveDeals = await Database.topFiveDeals();
-	console.log(topFiveDeals);
+
 	res.render('index', {
 		counter, topFiveDeals
 	});
 });
 
-app.post('/addDeal', async function(req, res){
-	let price = req.body.price;
-	let qty = req.body.qty;
-	let shop = req.body.shop_name;
-	
-	console.log('Selected price: ', price);
-	console.log('Selected qty: ', qty); 
-	console.log('Shop name: ', shop);
+app.get('/addDeal', async function(req, res){
+	let price = req.query.price;
+	let qty = req.query.qty;
+	let shop = req.query.shop_name;
 
 	if(price < 0 || price == ''){
 		// invalid price 
@@ -75,7 +71,7 @@ app.post('/addDeal', async function(req, res){
 		messages.error = '';
 	}
 	
-
+	console.log(messages)
 	let shops = await Database.listShops();
 
 	res.render('addDeal', {shops})
@@ -97,7 +93,7 @@ app.post('/addShop', async function(req, res){
 app.post('/recommend', async function(req, res){
 	let money = req.body.vusi_money;
 	let recommendedDeals = await Database.recommendDeals(money);
-	console.log('recoo deals: ', recommendedDeals)
+	
 	res.render('index', {recommendedDeals})
 });
 
