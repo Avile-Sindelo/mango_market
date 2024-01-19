@@ -23,7 +23,9 @@ module.exports = function (db) {
 	}
 
 	async function recommendDeals(amount) {
-		return await db.manyOrNone(`select * from mango_deal where price <= $1`, [amount])
+		return await db.manyOrNone(`select * from mango_deal
+									join shop on mango_deal.shop_id=shop.id
+									where price <= $1`, [amount])
 	}
 
 	async function getShopId(shopName){
