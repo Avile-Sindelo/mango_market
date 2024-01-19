@@ -40,6 +40,7 @@ let messages = {
 
 app.get('/', async function(req, res) {
 	let topFiveDeals = await Database.topFiveDeals();
+	console.log('Joint table: ', topFiveDeals);
 
 	res.render('index', {
 		counter, topFiveDeals

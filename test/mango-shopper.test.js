@@ -45,8 +45,8 @@ describe('The mango shopper', function () {
 
         const mangoShopper = MangoShopper(db);
 
-        const shopId = await mangoShopper.createShop('Mango Market');
-        await mangoShopper.createDeal(shopId, 5, 28);
+        const shopId = await mangoShopper.getShopId('Mango Market');
+        await mangoShopper.createDeal(5, 28, shopId);
 
         assert.equal();
     })
@@ -54,6 +54,7 @@ describe('The mango shopper', function () {
     it('should return all the deals for a given shop', async function () {
 
         const mangoShopper = MangoShopper(db);
+
 
         assert.deepEqual();
 
